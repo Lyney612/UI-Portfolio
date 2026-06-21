@@ -1743,9 +1743,28 @@ const tl_16 = gsap.timeline({ paused: true })
   .set($('2_1'), {position: 'absolute', top: 0, left: 0})
   .set($('2_55'), {position: 'absolute', top: 0, left: 0})
   .set($('2_55'), { display: 'block', x: '0%', y: '0%', opacity: 0 })
-    .to($('2_55'), { opacity: 1, duration: '0.3', ease: 'power2.out' })
-    .to($('2_1'), { opacity: 0, duration: '0.3', ease: 'power2.out' })
-    .set($('2_1'), { display: 'none' });
+  .call(() => {
+    const old = document.getElementById('char-clone');
+    if (old) old.remove();
+    const clone = $('2_28').cloneNode(true);
+    clone.id = 'char-clone';
+    clone.style.position = 'absolute';
+    clone.style.left = '365px';
+    clone.style.top = '351.66668701171875px';
+    clone.style.width = '320px';
+    clone.style.height = '320px';
+    clone.style.zIndex = '100';
+    clone.style.pointerEvents = 'none';
+    $('0_1').appendChild(clone);
+  })
+  .to('#char-clone', { left: '84px', top: '15px', width: '148px', height: '147px', duration: 0.6, ease: 'power2.inOut' }, 0)
+  .to($('2_55'), { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.2)
+  .to($('2_1'), { opacity: 0, duration: 0.3, ease: 'power2.out' }, 0.3)
+  .set($('2_1'), { display: 'none' })
+  .call(() => {
+    const clone = document.getElementById('char-clone');
+    if (clone) clone.remove();
+  });
 
 $('2_30').addEventListener("click", e => {
   e.stopPropagation();
