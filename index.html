@@ -1783,10 +1783,17 @@ $('2_30').addEventListener("click", e => {
   logoClone.style.position = 'absolute';
   logoClone.style.left = '128px';
   logoClone.style.top = '70.66668701171875px';
-  logoClone.style.width = '1184px';
+  logoClone.style.width = '400px';
   logoClone.style.height = '36px';
   logoClone.style.zIndex = '99';
   logoClone.style.pointerEvents = 'none';
+      // 移除克隆中的 HOME / WORKS / ABOUT
+      const navIds = ['2_29', '2_30', '2_31'];
+      navIds.forEach(id => {
+        const el = logoClone.querySelector('#' + id);
+        if (el) el.remove();
+      });
+      logoClone.style.overflow = 'hidden';
   $('0_1').appendChild(logoClone);
 
   // 原图快速淡出
