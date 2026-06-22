@@ -1743,14 +1743,9 @@ const tl_16 = gsap.timeline({ paused: true })
   .set($('2_1'), {position: 'absolute', top: 0, left: 0})
   .set($('2_55'), {position: 'absolute', top: 0, left: 0})
   .set($('2_55'), { display: 'block', x: '0%', y: '0%', opacity: 0 })
-  .to('#char-clone', { left: '84px', top: '15px', width: '148px', height: '147px', duration: 0.6, ease: 'power2.inOut' }, 0)
   .to($('2_55'), { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.2)
   .to($('2_1'), { opacity: 0, duration: 0.3, ease: 'power2.out' }, 0.3)
-  .set($('2_1'), { display: 'none' })
-  .call(() => {
-    const clone = document.getElementById('char-clone');
-    if (clone) clone.remove();
-  });
+  .set($('2_1'), { display: 'none' });
 
 $('2_30').addEventListener("click", e => {
   e.stopPropagation();
@@ -1766,6 +1761,16 @@ $('2_30').addEventListener("click", e => {
   clone.style.zIndex = '100';
   clone.style.pointerEvents = 'none';
   $('0_1').appendChild(clone);
+  // 独立 GSAP 动画：克隆元素直接引用，不经过时间线
+  gsap.to(clone, {
+    left: '84px',
+    top: '15px',
+    width: '148px',
+    height: '147px',
+    duration: 0.6,
+    ease: 'power2.inOut',
+    onComplete: () => { if (clone.parentNode) clone.remove(); }
+  });
   tl_16.invalidate().restart();
 });
 
