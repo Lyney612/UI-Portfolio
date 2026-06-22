@@ -1525,6 +1525,14 @@ span {
 <script>
 const $ = id => document.getElementById(id);
 
+	function cleanupClones() {
+	  const ids = ['char-clone', 'logo-clone'];
+	  ids.forEach(id => {
+	    const el = document.getElementById(id);
+	    if (el) el.remove();
+	  });
+	}
+
  $('2_55').style.display = "none";
  $('2_71').style.display = "none";
  $('13_1').style.display = "none";
@@ -1543,6 +1551,7 @@ const tl_1 = gsap.timeline({ paused: true })
 
 $('2_82').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_1.invalidate().restart();
 });
 
@@ -1556,6 +1565,7 @@ const tl_2 = gsap.timeline({ paused: true })
 
 $('2_83').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_2.invalidate().restart();
 });
 
@@ -1571,6 +1581,7 @@ const tl_3 = gsap.timeline({ paused: true })
 
 $('15_70').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_3.invalidate().restart();
 });
 
@@ -1584,6 +1595,7 @@ const tl_4 = gsap.timeline({ paused: true })
 
 $('15_72').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_4.invalidate().restart();
 });
 
@@ -1597,6 +1609,7 @@ const tl_5 = gsap.timeline({ paused: true })
 
 $('15_74').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_5.invalidate().restart();
 });
 
@@ -1612,6 +1625,7 @@ const tl_6 = gsap.timeline({ paused: true })
 
 $('15_43').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_6.invalidate().restart();
 });
 
@@ -1625,6 +1639,7 @@ const tl_7 = gsap.timeline({ paused: true })
 
 $('15_45').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_7.invalidate().restart();
 });
 
@@ -1638,6 +1653,7 @@ const tl_8 = gsap.timeline({ paused: true })
 
 $('15_52').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_8.invalidate().restart();
 });
 
@@ -1653,6 +1669,7 @@ const tl_9 = gsap.timeline({ paused: true })
 
 $('13_9').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_9.invalidate().restart();
 });
 
@@ -1666,6 +1683,7 @@ const tl_10 = gsap.timeline({ paused: true })
 
 $('13_11').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_10.invalidate().restart();
 });
 
@@ -1679,6 +1697,7 @@ const tl_11 = gsap.timeline({ paused: true })
 
 $('15_31').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_11.invalidate().restart();
 });
 
@@ -1694,6 +1713,7 @@ const tl_12 = gsap.timeline({ paused: true })
 
 $('2_66').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_12.invalidate().restart();
 });
 
@@ -1707,6 +1727,7 @@ const tl_13 = gsap.timeline({ paused: true })
 
 $('2_68').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_13.invalidate().restart();
 });
 
@@ -1720,6 +1741,7 @@ const tl_14 = gsap.timeline({ paused: true })
 
 $('9_8').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_14.invalidate().restart();
 });
 
@@ -1733,6 +1755,7 @@ const tl_15 = gsap.timeline({ paused: true })
 
 $('9_11').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_15.invalidate().restart();
 });
 
@@ -1746,6 +1769,7 @@ const tl_18 = gsap.timeline({ paused: true })
 
 $('9_15').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_18.invalidate().restart();
 });
 
@@ -1759,6 +1783,7 @@ const tl_16 = gsap.timeline({ paused: true })
 
 $('2_30').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   // 清理旧克隆
   const oldChar = document.getElementById('char-clone');
   if (oldChar) oldChar.remove();
@@ -1790,7 +1815,7 @@ $('2_30').addEventListener("click", e => {
       // 移除克隆中的 HOME / WORKS / ABOUT
       const navIds = ['2_29', '2_30', '2_31'];
       navIds.forEach(id => {
-        const el = logoClone.querySelector('#' + id);
+        const el = logoClone.querySelector('[id="' + id + '"]');
         if (el) el.remove();
       });
       logoClone.style.overflow = 'hidden';
@@ -1833,6 +1858,7 @@ const tl_17 = gsap.timeline({ paused: true })
 
 $('2_31').addEventListener("click", e => {
   e.stopPropagation();
+      cleanupClones();
   tl_17.invalidate().restart();
 });
 </script>
