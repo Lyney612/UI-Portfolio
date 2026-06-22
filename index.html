@@ -1756,7 +1756,7 @@ const tl_16 = gsap.timeline({ paused: true })
     clone.style.zIndex = '100';
     clone.style.pointerEvents = 'none';
     $('0_1').appendChild(clone);
-  })
+  }, 0)
   .to('#char-clone', { left: '84px', top: '15px', width: '148px', height: '147px', duration: 0.6, ease: 'power2.inOut' }, 0)
   .to($('2_55'), { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.2)
   .to($('2_1'), { opacity: 0, duration: 0.3, ease: 'power2.out' }, 0.3)
