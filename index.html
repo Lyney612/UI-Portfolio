@@ -1536,6 +1536,7 @@ const tl_1 = gsap.timeline({ paused: true })
   .set($('2_1'), {position: 'absolute', top: 0, left: 0})
   .set($('2_1'), { display: 'block', x: '0%', y: '0%', opacity: 0 })
     .set($('2_28'), { opacity: 1 })
+    .set($('2_36'), { opacity: 1 })
     .to($('2_1'), { opacity: 1, duration: '0.3', ease: 'power2.out' })
     .to($('2_71'), { opacity: 0, duration: '0.3', ease: 'power2.out' })
     .set($('2_71'), { display: 'none' });
@@ -1563,6 +1564,7 @@ const tl_3 = gsap.timeline({ paused: true })
   .set($('2_1'), {position: 'absolute', top: 0, left: 0})
   .set($('2_1'), { display: 'block', x: '0%', y: '0%', opacity: 0 })
     .set($('2_28'), { opacity: 1 })
+    .set($('2_36'), { opacity: 1 })
     .to($('2_1'), { opacity: 1, duration: '0.3', ease: 'power2.out' })
     .to($('15_65'), { opacity: 0, duration: '0.3', ease: 'power2.out' })
     .set($('15_65'), { display: 'none' });
@@ -1603,6 +1605,7 @@ const tl_6 = gsap.timeline({ paused: true })
   .set($('2_1'), {position: 'absolute', top: 0, left: 0})
   .set($('2_1'), { display: 'block', x: '0%', y: '0%', opacity: 0 })
     .set($('2_28'), { opacity: 1 })
+    .set($('2_36'), { opacity: 1 })
     .to($('2_1'), { opacity: 1, duration: '0.3', ease: 'power2.out' })
     .to($('15_35'), { opacity: 0, duration: '0.3', ease: 'power2.out' })
     .set($('15_35'), { display: 'none' });
@@ -1643,6 +1646,7 @@ const tl_9 = gsap.timeline({ paused: true })
   .set($('2_1'), {position: 'absolute', top: 0, left: 0})
   .set($('2_1'), { display: 'block', x: '0%', y: '0%', opacity: 0 })
     .set($('2_28'), { opacity: 1 })
+    .set($('2_36'), { opacity: 1 })
     .to($('2_1'), { opacity: 1, duration: '0.3', ease: 'power2.out' })
     .to($('13_1'), { opacity: 0, duration: '0.3', ease: 'power2.out' })
     .set($('13_1'), { display: 'none' });
@@ -1683,6 +1687,7 @@ const tl_12 = gsap.timeline({ paused: true })
   .set($('2_1'), {position: 'absolute', top: 0, left: 0})
   .set($('2_1'), { display: 'block', x: '0%', y: '0%', opacity: 0 })
     .set($('2_28'), { opacity: 1 })
+    .set($('2_36'), { opacity: 1 })
     .to($('2_1'), { opacity: 1, duration: '0.3', ease: 'power2.out' })
     .to($('2_55'), { opacity: 0, duration: '0.3', ease: 'power2.out' })
     .set($('2_55'), { display: 'none' });
@@ -1754,8 +1759,13 @@ const tl_16 = gsap.timeline({ paused: true })
 
 $('2_30').addEventListener("click", e => {
   e.stopPropagation();
-  const old = document.getElementById('char-clone');
-  if (old) old.remove();
+  // 清理旧克隆
+  const oldChar = document.getElementById('char-clone');
+  if (oldChar) oldChar.remove();
+  const oldLogo = document.getElementById('logo-clone');
+  if (oldLogo) oldLogo.remove();
+
+  // 克隆 Q 版小人
   const clone = $('2_28').cloneNode(true);
   clone.id = 'char-clone';
   clone.style.position = 'absolute';
@@ -1766,9 +1776,25 @@ $('2_30').addEventListener("click", e => {
   clone.style.zIndex = '100';
   clone.style.pointerEvents = 'none';
   $('0_1').appendChild(clone);
-      // 原图快速淡出
-      gsap.to($('2_28'), { opacity: 0, duration: 0.25, ease: 'power2.out' });
-  // 独立 GSAP 动画：克隆元素直接引用，不经过时间线
+
+  // 克隆左上角 Logo 组
+  const logoClone = $('2_36').cloneNode(true);
+  logoClone.id = 'logo-clone';
+  logoClone.style.position = 'absolute';
+  logoClone.style.left = '128px';
+  logoClone.style.top = '70.66668701171875px';
+  logoClone.style.width = '1184px';
+  logoClone.style.height = '36px';
+  logoClone.style.zIndex = '99';
+  logoClone.style.pointerEvents = 'none';
+  $('0_1').appendChild(logoClone);
+
+  // 原图快速淡出
+  gsap.to($('2_28'), { opacity: 0, duration: 0.25, ease: 'power2.out' });
+  // 原 Logo 快速淡出
+  gsap.to($('2_36'), { opacity: 0, duration: 0.25, ease: 'power2.out' });
+
+  // 克隆小人飞行 + 缩小
   gsap.to(clone, {
     left: '84px',
     top: '15px',
@@ -1778,6 +1804,15 @@ $('2_30').addEventListener("click", e => {
     ease: 'power2.inOut',
     onComplete: () => { if (clone.parentNode) clone.remove(); }
   });
+
+  // Logo 组向右滑动
+  gsap.to(logoClone, {
+    left: '278px',
+    duration: 0.55,
+    ease: 'power2.inOut',
+    onComplete: () => { if (logoClone.parentNode) logoClone.remove(); }
+  });
+
   tl_16.invalidate().restart();
 });
 
